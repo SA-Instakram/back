@@ -1,13 +1,20 @@
-package com.soa.instakram.entity;
+package com.soa.instakram.member.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 
 import java.time.LocalDateTime;
 
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 public class Member {
 
@@ -15,11 +22,17 @@ public class Member {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull
     private String email;
+    @NotNull
     private String password;
+    @NotNull
+    private String instaId;
+    @NotNull
+    private String name;
+
     @CreatedDate
     private LocalDateTime createdTime;
-
     private String image;
     private String introduce;
     private double follow;
