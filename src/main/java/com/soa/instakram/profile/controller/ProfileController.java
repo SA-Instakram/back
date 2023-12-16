@@ -2,7 +2,6 @@ package com.soa.instakram.profile.controller;
 
 import com.soa.instakram.profile.dto.response.ProfileDto;
 import com.soa.instakram.profile.service.ProfileService;
-import lombok.Getter;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
