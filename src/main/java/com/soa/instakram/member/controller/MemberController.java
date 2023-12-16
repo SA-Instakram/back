@@ -1,7 +1,8 @@
 package com.soa.instakram.member.controller;
 
-import com.soa.instakram.member.dto.LoginDto;
-import com.soa.instakram.member.dto.SignupDto;
+import com.soa.instakram.member.dto.request.LoginDto;
+import com.soa.instakram.member.dto.request.SignupDto;
+import com.soa.instakram.member.dto.response.TokenResponseDto;
 import com.soa.instakram.member.service.MemberService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -29,7 +30,7 @@ public class MemberController {
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody @Valid LoginDto loginDto) {
-        memberService.login(loginDto);
-        return ResponseEntity.ok().body("로그인 완료");
+        TokenResponseDto tokenResponseDto = memberService.login(loginDto);
+        return ResponseEntity.ok().body(tokenResponseDto);
     }
 }

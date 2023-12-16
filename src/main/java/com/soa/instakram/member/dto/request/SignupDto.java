@@ -1,4 +1,4 @@
-package com.soa.instakram.member.dto;
+package com.soa.instakram.member.dto.request;
 
 
 import com.soa.instakram.global.validation.NotDuplicate;
