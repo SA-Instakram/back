@@ -15,8 +15,9 @@ public interface PostRepository extends Repository<Post, Long> {
     void save(Post post);
 
     Optional<Post> findByPostId(Long postId);
-    Optional<Post> delete(Post post);
+    
 
     List<Post> findAllByOrderByPostId();
 
+    void delete(Post post);
 }
