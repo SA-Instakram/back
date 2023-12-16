@@ -43,10 +43,8 @@ public class MemberService {
     public TokenResponseDto login(LoginDto loginDto) {
         // 아이디 비밀번호 체크
         String email = loginDto.getEmail();
-        Member member = memberRepository.findByEmail(email).orElse(null);
-        if (member == null) {
-            throw new MemberNotFoundException();
-        }
+        Member member = memberRepository.findByEmail(email)
+                .orElseThrow(MemberNotFoundException::new);
         if (!passwordEncoder.matches(loginDto.getPassword(), member.getPassword())) {
             throw new PasswordNotMatchException();
         }
