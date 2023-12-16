@@ -7,6 +7,7 @@ import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 
@@ -16,6 +17,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Getter
 public class Member {
 
     @Id
@@ -31,8 +33,10 @@ public class Member {
     @NotNull
     private String name;
 
+
     @CreatedDate
     private LocalDateTime createdTime;
+    private String role;
     private String image;
     private String introduce;
     private double follow;
