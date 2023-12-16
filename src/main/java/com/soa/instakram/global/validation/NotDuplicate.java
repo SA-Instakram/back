@@ -10,7 +10,7 @@ import java.lang.annotation.Target;
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
 @Constraint(validatedBy = DuplicateValidator.class)
-public @interface CheckDuplicate {
+public @interface NotDuplicate {
     String target() default "";
     String message() default "";
     Class[] groups() default {};

@@ -8,26 +8,26 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RequiredArgsConstructor
-public class DuplicateValidator implements ConstraintValidator<CheckDuplicate, String> {
+public class DuplicateValidator implements ConstraintValidator<NotDuplicate, String> {
 
     private String target;
     private final MemberRepository memberRepository;
 
     @Override
-    public void initialize(CheckDuplicate constraintAnnotation) {
+    public void initialize(NotDuplicate constraintAnnotation) {
         this.target = constraintAnnotation.target();
     }
 
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {
         if (target.equals("email")) {
-            if (memberRepository.findByEmail(value) != null) {
+            if (memberRepository.findByEmail(value).isPresent()) {
                 addConstraintViolation(context, "중복된 이메일이 존재합니다.");
                 return false;
             }
         }
         else if (target.equals("instaId")) {
-            if (memberRepository.findByInstaId(value) != null) {
+            if (memberRepository.findByInstaId(value).isPresent()) {
                 addConstraintViolation(context, "중복된 인스타 아이디가 존재합니다.");
                 return false;
             }

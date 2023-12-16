@@ -1,7 +1,7 @@
 package com.soa.instakram.member.dto;
 
 
-import com.soa.instakram.global.validation.CheckDuplicate;
+import com.soa.instakram.global.validation.NotDuplicate;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
@@ -12,7 +12,7 @@ import lombok.Getter;
 @Builder
 public class SignupDto {
 
-    @CheckDuplicate(target = "email")
+    @NotDuplicate(target = "email")
     @Email(message = "이메일 형식이 올바르지 않습니다.")
     @NotBlank(message = "이메일은 필수 입력 값입니다.")
     private String email;
@@ -22,7 +22,7 @@ public class SignupDto {
              message = "8~20자리의 최소 하나 이상의 영문자, 숫자 또는 특수 문자 조합의 비밀번호여야 합니다.")
     private String password;
 
-    @CheckDuplicate(target = "instaId")
+    @NotDuplicate(target = "instaId")
     @NotBlank(message = "인스타 아이디는 필수 입력 값입니다.")
     @Pattern(regexp = "^[a-zA-Z0-9_.]{8,20}$", message = "8~20자리의 대소문자 영어 또는 숫자 또는 특수 문자('_', '.') 조합의 사용자 이름(인스타 아이디)이어야 합니다.")
     private String instaId;

@@ -1,5 +1,6 @@
 package com.soa.instakram.member.controller;
 
+import com.soa.instakram.member.dto.LoginDto;
 import com.soa.instakram.member.dto.SignupDto;
 import com.soa.instakram.member.service.MemberService;
 import jakarta.validation.Valid;
@@ -22,6 +23,13 @@ public class MemberController {
     @PostMapping("/signup")
     public ResponseEntity<?> signup(@RequestBody @Valid final SignupDto signupDto) {
         memberService.singUp(signupDto);
+
         return ResponseEntity.ok().body("회원가입 완료");
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody @Valid LoginDto loginDto) {
+        memberService.login(loginDto);
+        return ResponseEntity.ok().body("로그인 완료");
     }
 }
