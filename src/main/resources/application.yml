@@ -6,7 +6,7 @@ spring:
     password: ${MYSQL_PASSWORD}
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
 
 jwt:
   secretKey: ${JWT_SECRET_KEY}

@@ -1,4 +1,4 @@
-package com.soa.instakram.post.dto;
+package com.soa.instakram.comment.dto;
 
 
 import jakarta.persistence.Column;
@@ -8,13 +8,11 @@ import lombok.Getter;
 
 @Getter
 @Builder
-public class CreatePostDto {
+public class CreateCommentDto {
 
-    @Column(columnDefinition = "LONGTEXT")
-    @NotBlank(message = "이미지를 등록하세요")
-    private String image;
     @NotBlank(message = "글을 작성하세요")
     private String content;
-    private Long memberId;
+    private Long postId;
+    private String memberId;
 
 }

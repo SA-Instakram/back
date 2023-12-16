@@ -1,7 +1,6 @@
-package com.soa.instakram.post.entity;
+package com.soa.instakram.comment.entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -15,23 +14,19 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Entity
 @Getter
-public class Post {
-
+public class Comment {
     @Id
     @GeneratedValue(strategy =  GenerationType.IDENTITY)
-    private Long postId;
+    private Long commentId;
     private String content;
-    @Column(columnDefinition = "LONGTEXT")
-    private String image;
 
     @CreatedDate
-    private LocalDateTime createdTime;
+    private LocalDateTime commentedTime;
 
-    private  Long memberId;
-    private  int likes;
+    private Long postId;
+    private String memberId;
 
-    public void editPost(String content, String image){
+    public void editComment(String content){
         this.content = content;
-        this.image  = image;
     }
 }

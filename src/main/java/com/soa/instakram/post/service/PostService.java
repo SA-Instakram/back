@@ -8,6 +8,7 @@ import com.soa.instakram.post.entity.Post;
 import com.soa.instakram.post.repository.PostRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.java.Log;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -29,6 +30,7 @@ public class PostService {
                 .content(createPostDto.getContent())
                 .createdTime(LocalDateTime.now())
                 .image(createPostDto.getImage())
+                .memberId(createPostDto.getMemberId())
                 .build();
         postRepository.save(post);
     }
@@ -53,10 +55,12 @@ public class PostService {
                 .collect(Collectors.toList());
     }
 
-    public void delete(Long postId){
+    @Transactional
+    public void deletePost(Long postId){
         Post post = postRepository.findByPostId(postId)
-                .orElseThrow(()->new IllegalArgumentException("해당 게시물은 존재하지 않습니다"));
-
+                .orElseThrow(() -> new IllegalArgumentException("해당 게시물은 존재하지 않습니다"));
+        log.info("delete");
+        // 게시물이 존재할 때만 삭제 진행
         postRepository.delete(post);
     }
 }
