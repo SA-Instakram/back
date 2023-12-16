@@ -15,6 +15,6 @@ public class CreatePostDto {
     private String image;
     @NotBlank(message = "글을 작성하세요")
     private String content;
-    private Long memberId;
+    private String memberId;
 
 }

@@ -27,7 +27,7 @@ public class Post {
     @CreatedDate
     private LocalDateTime createdTime;
 
-    private  Long memberId;
+    private  String memberId;
     private  int likes;
 
     public void editPost(String content, String image){
