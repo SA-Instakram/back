@@ -1,22 +1,31 @@
 package com.soa.instakram.profile.controller;
 
-import com.soa.instakram.profile.dto.response.ProfileDto;
+import com.soa.instakram.profile.dto.ModifyDetails;
+import com.soa.instakram.profile.dto.ProfileDto;
 import com.soa.instakram.profile.service.ProfileService;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RequestMapping("/profile")
+@RequiredArgsConstructor
 @RestController
+@Slf4j
 public class ProfileController {
 
-    private ProfileService profileService;
+    private final ProfileService profileService;
 
     @GetMapping("/{instaId}")
-    public ResponseEntity<ProfileDto> getProfile(@RequestParam String instaId) {
+    public ResponseEntity<ProfileDto> getProfile(@PathVariable String instaId) {
         ProfileDto profile = profileService.getProfile(instaId);
         return ResponseEntity.ok().body(profile);
+    }
+
+    @PostMapping("/edit")
+    public ResponseEntity<?> modifyProfile(@RequestBody ModifyDetails modifyDetails) {
+        log.info("asfsd");
+        profileService.modifyProfile(modifyDetails);
+        return ResponseEntity.ok().body("프로필 수정 완료");
     }
 }

@@ -1,4 +1,4 @@
-package com.soa.instakram.profile.dto.response;
+package com.soa.instakram.profile.dto;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -10,7 +10,7 @@ public class ProfileDto {
     private String introduce;
     private String image;
     // private List<Post>
+    private String name;
     private double follow;
     private double follower;
-    private String name;
 }

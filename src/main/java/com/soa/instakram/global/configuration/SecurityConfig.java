@@ -20,8 +20,6 @@ public class SecurityConfig {
 
     private final String[] allowedUrls = {"/", "/member/signup", "/member/login"};
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
-//    private final DelegatingAuthenticationEntryPoint delegatingAuthenticationEntryPoint;
-//    private final DelegatingAccessDeniedHandler delegatingAccessDeniedHandler;
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http
