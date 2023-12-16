@@ -33,6 +33,7 @@ public class PostService {
         postRepository.save(post);
     }
 
+    @Transactional
     public  Long editPost(final Long postId, final EditPostDto editPostDto){
         Post post = postRepository.findByPostId(postId)
                 .orElseThrow(()-> new

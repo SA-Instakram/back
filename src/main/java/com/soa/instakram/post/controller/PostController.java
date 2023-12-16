@@ -36,7 +36,7 @@ public class PostController {
 
     }
 
-    @GetMapping("/")
+    @GetMapping("/allpost")
     public List<PostResponseDto> serachAll() {
         return postService.searchAll();
     }

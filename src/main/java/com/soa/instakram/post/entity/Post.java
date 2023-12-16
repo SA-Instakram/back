@@ -1,9 +1,6 @@
 package com.soa.instakram.post.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -23,9 +20,8 @@ public class Post {
     @Id
     @GeneratedValue(strategy =  GenerationType.IDENTITY)
     private Long postId;
-    @NotNull
     private String content;
-    @NotNull
+    @Column(columnDefinition = "LONGTEXT")
     private String image;
 
     @CreatedDate
