@@ -1,6 +1,10 @@
 package com.soa.instakram.post.service;
 
 
+import com.soa.instakram.global.error.exception.MemberNotFoundException;
+import com.soa.instakram.global.error.exception.PostNotFoundException;
+import com.soa.instakram.member.entity.Member;
+import com.soa.instakram.member.repository.MemberRepository;
 import com.soa.instakram.post.dto.CreatePostDto;
 import com.soa.instakram.post.dto.EditPostDto;
 import com.soa.instakram.post.dto.PostResponseDto;
@@ -10,6 +14,8 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -22,29 +28,30 @@ import java.util.stream.Collectors;
 public class PostService {
 
     private final PostRepository postRepository;
+    private final MemberRepository memberRepository;
 
     public void createPost(final CreatePostDto createPostDto){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String email = authentication.getName();
 
-        //.memberid 구현 필요
+        Member member = memberRepository.findByEmail(email)
+                .orElseThrow(MemberNotFoundException::new);
+
         Post post = Post.builder()
                 .content(createPostDto.getContent())
                 .createdTime(LocalDateTime.now())
                 .image(createPostDto.getImage())
-                .memberId(createPostDto.getMemberId())
+                .member(member)
                 .build();
         postRepository.save(post);
     }
 
     @Transactional
-    public  Long editPost(final Long postId, final EditPostDto editPostDto){
+    public void editPost(final Long postId, final EditPostDto editPostDto){
         Post post = postRepository.findByPostId(postId)
-                .orElseThrow(()-> new
-                        IllegalArgumentException("에러"));
+                .orElseThrow(PostNotFoundException::new);
         post.editPost(editPostDto.getContent(),
                 editPostDto.getImage());
-
-        return postId;
-
     }
 
     @Transactional
@@ -58,9 +65,7 @@ public class PostService {
     @Transactional
     public void deletePost(Long postId){
         Post post = postRepository.findByPostId(postId)
-                .orElseThrow(() -> new IllegalArgumentException("해당 게시물은 존재하지 않습니다"));
-        log.info("delete");
-        // 게시물이 존재할 때만 삭제 진행
+                .orElseThrow(PostNotFoundException::new);
         postRepository.delete(post);
     }
 }

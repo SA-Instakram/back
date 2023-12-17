@@ -22,7 +22,6 @@ public class ProfileService {
 
     private final MemberRepository memberRepository;
     public ProfileDto getProfile(String instaId) {
-        log.info("asfsfsfs");
         Member member = memberRepository.findByInstaId(instaId)
                 .orElseThrow(MemberNotFoundException::new);
 
@@ -31,15 +30,20 @@ public class ProfileService {
                 .introduce(member.getIntroduce())
                 .image(member.getImage())
                 .name(member.getName())
+                .posts(member.getPosts())
                 .build();
     }
 
     public void modifyProfile(ModifyDetails modifyDetails) {
-        Member member = memberRepository.findByInstaId(modifyDetails.getInstaId())
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String email = authentication.getName();
+        Member member = memberRepository.findByEmail(email)
                 .orElseThrow(MemberNotFoundException::new);
 
+        member.setInstaId(modifyDetails.getInstaId());
         member.setIntroduce(modifyDetails.getIntroduce());
         member.setImage(modifyDetails.getImage());
+        member.setName(modifyDetails.getName());
 
         memberRepository.save(member);
     }

@@ -6,6 +6,7 @@ import com.soa.instakram.comment.dto.CreateCommentDto;
 import com.soa.instakram.comment.dto.EditCommentDto;
 import com.soa.instakram.comment.entity.Comment;
 import com.soa.instakram.comment.repository.CommentRepository;
+import com.soa.instakram.global.error.exception.CommentNotFoundException;
 import com.soa.instakram.post.dto.PostResponseDto;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -24,8 +25,6 @@ public class CommentService {
     private final CommentRepository commentRepository;
 
     public void createComment(final CreateCommentDto createCommentDto){
-
-        //.memberid 구현 필요
         Comment comment = Comment.builder()
                 .content(createCommentDto.getContent())
                 .commentedTime(LocalDateTime.now())
@@ -36,10 +35,9 @@ public class CommentService {
     }
 
     @Transactional
-    public  Long editComment(final Long commentId, final EditCommentDto editCommentDto){
+    public Long editComment(final Long commentId, final EditCommentDto editCommentDto){
         Comment comment = commentRepository.findByCommentId(commentId)
-                .orElseThrow(()-> new
-                        IllegalArgumentException("에러"));
+                .orElseThrow(CommentNotFoundException::new);
         comment.editComment(editCommentDto.getContent());
 
         return commentId;
@@ -56,8 +54,7 @@ public class CommentService {
 
     public void delete(Long postId){
         Comment comment = commentRepository.findByCommentId(postId)
-                .orElseThrow(()->new IllegalArgumentException("해당 댓글은 존재하지 않습니다"));
-
+                .orElseThrow(CommentNotFoundException::new);
         commentRepository.delete(comment);
     }
 }

@@ -22,14 +22,13 @@ public class MemberController {
     private final MemberService memberService;
 
     @PostMapping("/signup")
-    public ResponseEntity<?> signup(@RequestBody @Valid final SignupDto signupDto) {
+    public ResponseEntity<String> signup(@RequestBody @Valid final SignupDto signupDto) {
         memberService.singUp(signupDto);
-
         return ResponseEntity.ok().body("회원가입 완료");
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody @Valid LoginDto loginDto) {
+    public ResponseEntity<TokenResponseDto> login(@RequestBody @Valid LoginDto loginDto) {
         TokenResponseDto tokenResponseDto = memberService.login(loginDto);
         return ResponseEntity.ok().body(tokenResponseDto);
     }
