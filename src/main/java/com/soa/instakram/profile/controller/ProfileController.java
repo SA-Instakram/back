@@ -23,8 +23,7 @@ public class ProfileController {
     }
 
     @PostMapping("/edit")
-    public ResponseEntity<?> modifyProfile(@RequestBody ModifyDetails modifyDetails) {
-        log.info("asfsd");
+    public ResponseEntity<String> modifyProfile(@RequestBody ModifyDetails modifyDetails) {
         profileService.modifyProfile(modifyDetails);
         return ResponseEntity.ok().body("프로필 수정 완료");
     }

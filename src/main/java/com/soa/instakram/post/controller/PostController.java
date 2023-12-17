@@ -24,28 +24,27 @@ public class PostController {
     private final PostService postService;
 
     @PostMapping("/create")
-    public ResponseEntity<?> createpost(@RequestBody final CreatePostDto createpostDto) {
-        log.info("aaaaa");
+    public ResponseEntity<String> createPost(@RequestBody final CreatePostDto createpostDto) {
         postService.createPost(createpostDto);
-        return ResponseEntity.ok().body("글 작성완료");
+        return ResponseEntity.ok().body("게시글 작성 완료");
     }
 
     @PutMapping("/{postId}")
-    public Long editPostDto(@PathVariable Long postId, @RequestBody final EditPostDto editPostDto){
-        return postService.editPost(postId, editPostDto);
-
+    public ResponseEntity<String> editPostDto(@PathVariable Long postId, @RequestBody final EditPostDto editPostDto){
+        postService.editPost(postId, editPostDto);
+        return ResponseEntity.ok().body("게시글 수정 완료");
     }
 
     @GetMapping("/allpost")
-    public List<PostResponseDto> serachAll() {
+    public List<PostResponseDto> searchAll() {
         return postService.searchAll();
     }
 
 
     @DeleteMapping("/delete/{postId}")
-    public void deletePost(@PathVariable Long postId){
+    public ResponseEntity<String> deletePost(@PathVariable Long postId){
         postService.deletePost(postId);
+        return ResponseEntity.ok().body("게시글 삭제 완료");
     }
-
 
 }

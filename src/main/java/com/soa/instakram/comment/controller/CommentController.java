@@ -28,29 +28,27 @@ public class CommentController {
     private final CommentService commentService;
 
     @PostMapping("/create")
-    public ResponseEntity<?> createComment(@RequestBody final CreateCommentDto createCommentDto) {
-        log.info("bbbbb");
+    public ResponseEntity<String> createComment(@RequestBody final CreateCommentDto createCommentDto) {
         commentService.createComment(createCommentDto);
-        return ResponseEntity.ok().body("댓글 작성완료");
+        return ResponseEntity.ok().body("댓글 작성 완료");
     }
 
     @PutMapping("/{commentId}")
-    public Long editCommentDto(@PathVariable Long commentId, @RequestBody final EditCommentDto editCommentDto){
-        return commentService.editComment(commentId, editCommentDto);
-
+    public ResponseEntity<String> editCommentDto(@PathVariable Long commentId, @RequestBody final EditCommentDto editCommentDto){
+        commentService.editComment(commentId, editCommentDto);
+        return ResponseEntity.ok().body("댓글 수정 완료");
     }
 
     @GetMapping("/{postId}")
-    public List<CommentResponseDto> serachAll(@PathVariable Long postId) {
-        log.info((commentService.searchAll(postId).toString()));
+    public List<CommentResponseDto> searchAll(@PathVariable Long postId) {
         return commentService.searchAll(postId);
     }
 
 
     @DeleteMapping("/delete/{commentId}")
-    public void delete(@PathVariable Long commentId){
+    public ResponseEntity<String> delete(@PathVariable Long commentId){
         commentService.delete(commentId);
+        return ResponseEntity.ok().body("댓글 삭제 완료");
     }
-
 
 }

@@ -7,4 +7,5 @@ public class ModifyDetails {
     private String instaId;
     private String introduce;
     private String image;
+    private String name;
 }

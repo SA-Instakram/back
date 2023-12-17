@@ -1,5 +1,7 @@
 package com.soa.instakram.post.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.soa.instakram.member.entity.Member;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -27,8 +29,13 @@ public class Post {
     @CreatedDate
     private LocalDateTime createdTime;
 
-    private  String memberId;
-    private  int likes;
+//    private  String memberId;
+    private int likes;
+
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "member_id")
+    private Member member;
 
     public void editPost(String content, String image){
         this.content = content;
