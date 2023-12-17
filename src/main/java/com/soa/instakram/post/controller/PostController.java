@@ -41,6 +41,10 @@ public class PostController {
         return postService.searchAll();
     }
 
+    @GetMapping("/follwerpost/{memberLongId}")
+    public List<PostResponseDto> getPostsByFollowing(@PathVariable Long memberLongId)
+    {return postService.getPostsByFollowing(memberLongId);};
+
 
     @DeleteMapping("/delete/{postId}")
     public void deletePost(@PathVariable Long postId){

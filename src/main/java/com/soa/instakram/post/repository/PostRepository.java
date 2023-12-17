@@ -2,11 +2,9 @@ package com.soa.instakram.post.repository;
 
 
 import com.soa.instakram.post.entity.Post;
-import lombok.RequiredArgsConstructor;
 import org.springframework.data.repository.Repository;
 
 
-import java.util.Arrays;
 import java.util.Optional;
 import java.util.List;
 
@@ -20,4 +18,6 @@ public interface PostRepository extends Repository<Post, Long> {
     List<Post> findAllByOrderByPostId();
 
     void delete(Post post);
+
+    Optional<Post> findByMemberIdIn(List<String> instIds);
 }

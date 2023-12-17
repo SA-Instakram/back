@@ -28,6 +28,7 @@ public class Post {
     private LocalDateTime createdTime;
 
     private  String memberId;
+    private Long memberLongId;
     private  int likes;
 
     public void editPost(String content, String image){

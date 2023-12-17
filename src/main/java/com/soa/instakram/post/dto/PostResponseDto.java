@@ -12,10 +12,13 @@ public class PostResponseDto {
     @Column(columnDefinition = "LONGTEXT")
     final private String image;
 
+    final private String memberId;
+
     public PostResponseDto(Post entity){
         this.postId = entity.getPostId();
         this.content = entity.getContent();
         this.image = entity.getImage();
+        this.memberId = entity.getMemberId();
 
     }
 }
