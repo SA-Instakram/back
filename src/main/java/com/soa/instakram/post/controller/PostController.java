@@ -29,7 +29,7 @@ public class PostController {
         return ResponseEntity.ok().body("게시글 작성 완료");
     }
 
-    @PutMapping("/{postId}")
+    @PutMapping("/modify/{postId}")
     public ResponseEntity<String> editPostDto(@PathVariable Long postId, @RequestBody final EditPostDto editPostDto){
         postService.editPost(postId, editPostDto);
         return ResponseEntity.ok().body("게시글 수정 완료");

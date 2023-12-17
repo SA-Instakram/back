@@ -25,6 +25,7 @@ public class Post {
     private String content;
     @Column(columnDefinition = "LONGTEXT")
     private String image;
+    private String instaId;
 
     @CreatedDate
     private LocalDateTime createdTime;
@@ -33,7 +34,7 @@ public class Post {
     private int likes;
 
     @JsonIgnore
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "member_id")
     private Member member;
 

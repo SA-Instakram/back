@@ -2,11 +2,12 @@ package com.soa.instakram.post.dto;
 
 
 import jakarta.persistence.Column;
-import lombok.Builder;
-import lombok.Getter;
+import lombok.*;
 
 @Getter
 @Builder
+@Setter
+@NoArgsConstructor
 public class EditPostDto {
     private String content;
     @Column(columnDefinition = "LONGTEXT")
